@@ -77,3 +77,29 @@
 	</nav>
 </div>
 <div class="mobile-menu-overlay" id="mobile-overlay"></div>
+
+<!-- Mini-cart drawer -->
+<div class="mini-cart" id="mini-cart" role="dialog" aria-modal="true" aria-labelledby="mini-cart-title" aria-hidden="true" tabindex="-1">
+	<div class="mini-cart__header">
+		<h3 class="mini-cart__title" id="mini-cart-title"><?php esc_html_e( 'Корзина', 'pirogova' ); ?></h3>
+		<button class="mini-cart__close" id="mini-cart-close" aria-label="<?php esc_attr_e( 'Закрыть корзину', 'pirogova' ); ?>">
+			<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="2" y1="2" x2="16" y2="16"/><line x1="16" y1="2" x2="2" y2="16"/></svg>
+		</button>
+	</div>
+	<div class="mini-cart__body">
+		<div class="mini-cart__items" id="mini-cart-items"></div>
+		<p class="mini-cart__empty" id="mini-cart-empty"><?php esc_html_e( 'Корзина пуста', 'pirogova' ); ?></p>
+	</div>
+	<div class="mini-cart__footer" id="mini-cart-footer" hidden>
+		<div class="mini-cart__total">
+			<?php esc_html_e( 'Итого:', 'pirogova' ); ?> <span id="mini-cart-total">0 ₽</span>
+		</div>
+		<a href="<?php echo esc_url( function_exists( 'wc_get_checkout_url' ) ? wc_get_checkout_url() : '#' ); ?>" class="btn btn--primary">
+			<?php esc_html_e( 'Оформить заказ', 'pirogova' ); ?>
+		</a>
+		<a href="#catalog" class="btn btn--secondary mini-cart__continue">
+			<?php esc_html_e( 'Продолжить покупки', 'pirogova' ); ?>
+		</a>
+	</div>
+</div>
+<div class="mini-cart-backdrop" id="mini-cart-backdrop"></div>

@@ -58,6 +58,111 @@
     });
   }
 
+  // ─── Mini-cart ───────────────────────────────────────────────────────────
+  const miniCart         = $('#mini-cart');
+  const miniCartBackdrop = $('#mini-cart-backdrop');
+  const miniCartClose    = $('#mini-cart-close');
+  const cartLink         = $('.header__cart');
+
+  function openMiniCart() {
+    renderMiniCart();
+    miniCart?.classList.add('open');
+    miniCart?.removeAttribute('aria-hidden');
+    miniCartBackdrop?.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    miniCart?.focus();
+  }
+
+  function closeMiniCart() {
+    miniCart?.classList.remove('open');
+    miniCart?.setAttribute('aria-hidden', 'true');
+    miniCartBackdrop?.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function renderMiniCart() {
+    const itemsEl  = $('#mini-cart-items');
+    const emptyEl  = $('#mini-cart-empty');
+    const footerEl = $('#mini-cart-footer');
+    const totalEl  = $('#mini-cart-total');
+    if (!itemsEl) return;
+
+    const items = Object.values(cartItems).filter(it => it.qty > 0);
+
+    if (!items.length) {
+      itemsEl.innerHTML = '';
+      emptyEl?.removeAttribute('hidden');
+      footerEl?.setAttribute('hidden', '');
+      return;
+    }
+    emptyEl?.setAttribute('hidden', '');
+    footerEl?.removeAttribute('hidden');
+
+    let total = 0;
+    itemsEl.innerHTML = items.map(item => {
+      total += item.priceNum * item.qty;
+      return `
+        <div class="mini-cart-item" data-product-id="${item.id}">
+          <div class="mini-cart-item__info">
+            <div class="mini-cart-item__name">${item.name}</div>
+            ${item.variationLabel ? `<div class="mini-cart-item__meta">${item.variationLabel}</div>` : ''}
+          </div>
+          <div class="mini-cart-item__controls">
+            <button class="mini-cart-item__btn mini-cart-item__minus" data-id="${item.id}" aria-label="Уменьшить">−</button>
+            <span class="mini-cart-item__qty">${item.qty}</span>
+            <button class="mini-cart-item__btn mini-cart-item__plus pirogova-popup-trigger"
+                    data-product-id="${item.id}" aria-label="Добавить ещё">+</button>
+          </div>
+          <div class="mini-cart-item__price">${(item.priceNum * item.qty).toLocaleString('ru-RU')} ₽</div>
+        </div>`;
+    }).join('');
+
+    if (totalEl) totalEl.textContent = total.toLocaleString('ru-RU') + ' ₽';
+
+    // Minus handlers in mini-cart
+    $$('.mini-cart-item__minus', itemsEl).forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = parseInt(btn.dataset.id, 10);
+        if (!cartItems[id]) return;
+        cartItems[id].qty = Math.max(0, cartItems[id].qty - 1);
+        cartState[id]     = cartItems[id].qty;
+        const newTotal = Object.values(cartState).reduce((s, q) => s + q, 0);
+        updateCartCount(newTotal);
+        syncCardCartState(id, cartItems[id].qty);
+        renderMiniCart();
+      });
+    });
+  }
+
+  // Sync card UI to an absolute qty (used when decrementing from mini-cart)
+  function syncCardCartState(productId, qty) {
+    const card = document.querySelector(`.catalog-card[data-product-id="${productId}"]`);
+    if (!card) return;
+    const badge = card.querySelector('.catalog-card__cart-badge');
+    const controls = card.querySelector('.catalog-card__cart-controls');
+    const btn = card.querySelector('.catalog-card__btn');
+    if (qty <= 0) {
+      badge?.remove();
+      controls?.remove();
+      if (btn) btn.style.display = '';
+    } else {
+      if (badge) badge.textContent = qty;
+      if (controls) controls.querySelector('.catalog-card__qty-val').textContent = qty;
+    }
+  }
+
+  if (cartLink) {
+    cartLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      openMiniCart();
+    });
+  }
+  miniCartClose?.addEventListener('click', closeMiniCart);
+  miniCartBackdrop?.addEventListener('click', closeMiniCart);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && miniCart?.classList.contains('open')) closeMiniCart();
+  });
+
   // ─── 2. Smooth scroll ────────────────────────────────────────────────────
   document.addEventListener('click', (e) => {
     const anchor = e.target.closest('a[href^="#"]');
@@ -81,6 +186,8 @@
 
   // Track quantities per product currently in cart.
   const cartState = {}; // { productId: totalQty }
+  // Track full item details for mini-cart rendering.
+  const cartItems = {}; // { productId: { id, name, variationLabel, priceNum, priceHtml, qty } }
 
   /**
    * Initialise or re-init the Swiper carousel inside the popup.
@@ -373,8 +480,15 @@
     addToCartBtn.addEventListener('click', () => {
       if (!currentProductId) return;
 
-      const qty = parseInt(qtyInput?.value, 10) || 1;
+      const qty  = parseInt(qtyInput?.value, 10) || 1;
       const i18n = PirogovaData.i18n;
+
+      // Capture current product info for mini-cart
+      const productName    = $('#popup-product-name')?.textContent?.trim() || '';
+      const activeWeightEl = $('.popup__weight-btn.active', popup);
+      const variationLabel = activeWeightEl?.textContent?.trim() || '';
+      const priceText      = $('#popup-price')?.textContent || '';
+      const priceNum       = parseFloat(priceText.replace(/[^\d]/g, '')) || 0;
 
       // Disable button during request.
       addToCartBtn.disabled = true;
@@ -400,6 +514,17 @@
           updateCartCount(res.data.cart_count);
           // Update catalog card to show qty in cart.
           updateCardCartState(currentProductId, qty);
+          // Store item details for mini-cart.
+          if (cartItems[currentProductId]) {
+            cartItems[currentProductId].qty += qty;
+          } else {
+            cartItems[currentProductId] = {
+              id: currentProductId, name: productName,
+              variationLabel, priceNum,
+              priceHtml: `${priceNum.toLocaleString('ru-RU')} ₽`,
+              qty,
+            };
+          }
           // Show success feedback.
           showCartFeedback(i18n.added, res.data.checkout_url);
           // Re-enable button.
@@ -471,11 +596,14 @@
 
       footer.appendChild(cartControls);
 
-      // Minus: reduce qty (UI only — full WC integration on real WP)
+      // Minus: reduce qty
       cartControls.querySelector('.catalog-card__qty-minus').addEventListener('click', (e) => {
         e.stopPropagation();
         cartState[productId] = Math.max(0, (cartState[productId] || 1) - 1);
+        if (cartItems[productId]) cartItems[productId].qty = cartState[productId];
         const newTotal = cartState[productId];
+        const globalTotal = Object.values(cartState).reduce((s, q) => s + q, 0);
+        updateCartCount(globalTotal);
         cartControls.querySelector('.catalog-card__qty-val').textContent = newTotal;
         badge.textContent = newTotal;
         if (newTotal === 0) {
