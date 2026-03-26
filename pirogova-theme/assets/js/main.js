@@ -79,6 +79,9 @@
   let currentProductId = null;
   let currentVariationId = null;
 
+  // Track quantities per product currently in cart.
+  const cartState = {}; // { productId: totalQty }
+
   /**
    * Initialise or re-init the Swiper carousel inside the popup.
    */
@@ -113,6 +116,7 @@
     // Reset state.
     showPopupLoading(true);
     hideCartFeedback();
+    if (qtyInput) qtyInput.value = 1;
 
     currentProductId = productId;
     currentVariationId = null;
@@ -392,8 +396,10 @@
         .then(r => r.json())
         .then(res => {
           if (!res.success) throw new Error(res.data?.message || 'Ошибка');
-          // Update cart count.
+          // Update cart count badge.
           updateCartCount(res.data.cart_count);
+          // Update catalog card to show qty in cart.
+          updateCardCartState(currentProductId, qty);
           // Show success feedback.
           showCartFeedback(i18n.added, res.data.checkout_url);
           // Re-enable button.
@@ -412,14 +418,79 @@
   function updateCartCount(count) {
     const countEl = $('#cart-count');
     if (!countEl) return;
-    countEl.textContent = count;
-    countEl.dataset.count = count;
+    const n = parseInt(count, 10) || 0;
+    countEl.textContent = n;
+    countEl.dataset.count = n;
+    countEl.style.display = n > 0 ? 'flex' : 'none';
     // Bump animation.
-    countEl.classList.remove('bump');
-    void countEl.offsetWidth; // reflow
-    countEl.classList.add('bump');
-    setTimeout(() => countEl.classList.remove('bump'), 300);
+    if (n > 0) {
+      countEl.classList.remove('bump');
+      void countEl.offsetWidth; // reflow
+      countEl.classList.add('bump');
+      setTimeout(() => countEl.classList.remove('bump'), 300);
+    }
   }
+
+  // ─── Update catalog card after add to cart ────────────────────────────────
+  function updateCardCartState(productId, addedQty) {
+    const card = document.querySelector(`.catalog-card[data-product-id="${productId}"]`);
+    if (!card) return;
+
+    cartState[productId] = (cartState[productId] || 0) + addedQty;
+    const total = cartState[productId];
+
+    // 1. Badge on image
+    let badge = card.querySelector('.catalog-card__cart-badge');
+    if (!badge) {
+      badge = document.createElement('div');
+      badge.className = 'catalog-card__cart-badge';
+      const imageWrap = card.querySelector('.catalog-card__image-wrap');
+      if (imageWrap) imageWrap.appendChild(badge);
+    }
+    badge.textContent = total;
+
+    // 2. Replace "Выбрать" button with inline qty controls
+    const footer = card.querySelector('.catalog-card__footer');
+    if (!footer) return;
+
+    let cartControls = footer.querySelector('.catalog-card__cart-controls');
+    if (!cartControls) {
+      // Build inline +/- controls
+      cartControls = document.createElement('div');
+      cartControls.className = 'catalog-card__cart-controls';
+      cartControls.innerHTML = `
+        <button class="catalog-card__qty-btn catalog-card__qty-minus" aria-label="Уменьшить">−</button>
+        <span class="catalog-card__qty-val">${total}</span>
+        <button class="catalog-card__qty-btn catalog-card__qty-plus pirogova-popup-trigger"
+                data-product-id="${productId}" aria-label="Добавить ещё">+</button>
+      `;
+
+      // Hide original "Выбрать" button
+      const btn = footer.querySelector('.catalog-card__btn');
+      if (btn) btn.style.display = 'none';
+
+      footer.appendChild(cartControls);
+
+      // Minus: reduce qty (UI only — full WC integration on real WP)
+      cartControls.querySelector('.catalog-card__qty-minus').addEventListener('click', (e) => {
+        e.stopPropagation();
+        cartState[productId] = Math.max(0, (cartState[productId] || 1) - 1);
+        const newTotal = cartState[productId];
+        cartControls.querySelector('.catalog-card__qty-val').textContent = newTotal;
+        badge.textContent = newTotal;
+        if (newTotal === 0) {
+          cartControls.remove();
+          badge.remove();
+          if (btn) btn.style.display = '';
+        }
+      });
+    } else {
+      cartControls.querySelector('.catalog-card__qty-val').textContent = total;
+    }
+  }
+
+  // Init cart count display on load.
+  updateCartCount(0);
 
   // ─── Popup helpers ───────────────────────────────────────────────────────
   function showPopupLoading(show) {

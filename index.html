@@ -581,7 +581,9 @@ window.fetch = function(url, opts) {
       return Promise.resolve({ json: () => Promise.resolve({ success: true, data: product }) });
     }
     if (action === 'pirogova_add_to_cart') {
-      const count = (parseInt(document.getElementById('cart-count').textContent, 10) || 0) + 1;
+      const qty = parseInt(body.get('quantity'), 10) || 1;
+      const prev = parseInt(document.getElementById('cart-count').textContent, 10) || 0;
+      const count = prev + qty;
       return Promise.resolve({ json: () => Promise.resolve({ success: true, data: { cart_count: count, cart_total: '—', cart_url: '#', checkout_url: '#' } }) });
     }
   }
