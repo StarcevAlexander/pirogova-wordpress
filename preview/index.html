@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Пирогова — Превью темы</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="../pirogova-theme/assets/css/main.css">
+  <style>
+    :root {
+      --font-base: 'Inter', Arial, sans-serif;
+      --font-display: 'Inter', Arial, sans-serif;
+    }
+
+    /* ── Preview banner ── */
+    .dev-banner {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      background: #1e1e2e;
+      color: #cdd6f4;
+      font-family: monospace;
+      font-size: .75rem;
+      padding: .5rem .875rem;
+      border-radius: 8px;
+      z-index: 9999;
+      box-shadow: 0 4px 16px rgba(0,0,0,.3);
+      pointer-events: none;
+    }
+    .dev-banner span { color: #a6e3a1; }
+
+    /* ── Fake images using CSS gradients ── */
+    .fake-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .pie-1  { background: linear-gradient(135deg, #c8860a 0%, #7b4a2d 100%); }
+    .pie-2  { background: linear-gradient(135deg, #e8a87c 0%, #c8860a 100%); }
+    .pie-3  { background: linear-gradient(135deg, #9e6040 0%, #5a3320 100%); }
+    .pie-4  { background: linear-gradient(135deg, #d4956a 0%, #7b4a2d 100%); }
+    .pie-5  { background: linear-gradient(135deg, #b87333 0%, #8b4513 100%); }
+    .pie-6  { background: linear-gradient(135deg, #cd853f 0%, #6b3a2a 100%); }
+    .pie-img { position: absolute; inset: 0; }
+    .pie-emoji {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,.3));
+    }
+
+    /* Hero mock */
+    .hero-mock-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #3d1c08 0%, #7b4a2d 50%, #c8860a 100%);
+    }
+    .hero-mock-img {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 5%;
+      font-size: 14rem;
+      opacity: .18;
+      filter: blur(1px);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── HEADER ─────────────────────────────────────────── -->
+<header class="site-header" id="site-header">
+  <div class="container header__inner">
+    <a href="#" class="header__logo">
+      <span class="header__logo-text">🥧 Пирогова</span>
+    </a>
+    <nav class="header__nav">
+      <ul class="header__nav-list">
+        <li><a href="#catalog">Каталог</a></li>
+        <li><a href="#how-it-works">Как это работает</a></li>
+        <li><a href="#media">О нас в СМИ</a></li>
+        <li><a href="#contacts">Контакты</a></li>
+      </ul>
+    </nav>
+    <div class="header__right">
+      <a href="tel:+74951234567" class="header__phone">+7 (495) 123-45-67</a>
+      <a href="#" class="header__cart" aria-label="Корзина">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span class="header__cart-count" id="cart-count">0</span>
+      </a>
+      <button class="header__burger" aria-label="Меню" aria-expanded="false" id="burger-btn">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <nav>
+    <ul>
+      <li><a href="#catalog">Каталог</a></li>
+      <li><a href="#how-it-works">Как это работает</a></li>
+      <li><a href="#media">О нас в СМИ</a></li>
+      <li><a href="#contacts">Контакты</a></li>
+    </ul>
+    <a href="tel:+74951234567" class="mobile-menu__phone">+7 (495) 123-45-67</a>
+  </nav>
+</div>
+<div class="mobile-menu-overlay" id="mobile-overlay"></div>
+
+<!-- ─── HERO ───────────────────────────────────────────── -->
+<main id="main-content">
+<section class="hero" id="hero">
+  <div class="hero__bg" style="background: linear-gradient(135deg, #2c1810 0%, #7b4a2d 50%, #c8860a 100%);">
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-end;padding-right:6%;font-size:16rem;opacity:.12;pointer-events:none;user-select:none">🥧</div>
+  </div>
+  <div class="hero__overlay"></div>
+  <div class="container hero__content">
+    <h1 class="hero__title">Домашние пироги<br>с доставкой</h1>
+    <p class="hero__subtitle">Готовим с любовью, доставляем горячими прямо к вашей двери</p>
+    <a href="#catalog" class="btn btn--primary hero__cta">Выбрать пирог</a>
+  </div>
+  <a href="#catalog" class="hero__scroll-hint" aria-label="Прокрутить вниз">
+    <svg width="24" height="40" viewBox="0 0 24 40" fill="none"><rect x="1" y="1" width="22" height="38" rx="11" stroke="currentColor" stroke-width="2"/><circle class="hero__scroll-dot" cx="12" cy="10" r="3" fill="currentColor"/></svg>
+  </a>
+</section>
+
+<!-- ─── CATALOG ────────────────────────────────────────── -->
+<section class="catalog" id="catalog">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Наши пироги</h2>
+      <p class="section-subtitle">Выберите пирог и граммовку — доставим свежим</p>
+    </div>
+    <div class="catalog__grid">
+
+      <!-- Card 1 -->
+      <article class="catalog-card" data-product-id="1">
+        <button class="catalog-card__image-wrap pirogova-popup-trigger" data-product-id="1" aria-haspopup="dialog">
+          <div class="fake-img pie-1 pie-img"></div>
+          <div class="pie-emoji">🥧</div>
+        </button>
+        <div class="catalog-card__body">
+          <h3 class="catalog-card__title">
+            <button class="pirogova-popup-trigger catalog-card__title-btn" data-product-id="1">Пирог с капустой</button>
+          </h3>
+          <p class="catalog-card__desc">Сочная белокочанная капуста с яйцом и зелёным луком на нашем фирменном тесте</p>
+          <div class="catalog-card__weights">
+            <button class="catalog-card__weight-btn pirogova-popup-trigger" data-product-id="1" data-variation-id="11">500 г</button>
+            <button class="catalog-card__weight-btn pirogova-popup-trigger" data-product-id="1" data-variation-id="12">750 г</button>
+            <button class="catalog-card__weight-btn pirogova-popup-trigger" data-product-id="1" data-variation-id="13">1000 г</button>
+          </div>
+          <div class="catalog-card__footer">
+            <div class="catalog-card__price">от <strong>450 ₽</strong></div>
+            <button class="btn btn--primary catalog-card__btn pirogova-popup-trigger" data-product-id="1">Выбрать</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="catalog-card" data-product-id="2">
+        <button class="catalog-card__image-wrap pirogova-popup-trigger" data-product-id="2" aria-haspopup="dialog">
+          <div class="fake-img pie-2 pie-img"></div>
+          <div class="pie-emoji">🫐</div>
+        </button>
+        <div class="catalog-card__body">
+          <h3 class="catalog-card__title">
+            <button class="pirogova-popup-trigger catalog-card__title-btn" data-product-id="2">Пирог с черникой</button>
+          </h3>
+          <p class="catalog-card__desc">Нежный пирог с черничным вареньем, посыпанный сахарной пудрой — любимец детей</p>
+          <div class="catalog-card__weights">
+            <button class="catalog-card__weight-btn pirogova-popup-trigger" data-product-id="2" data-variation-id="21">500 г</button>
+            <button class="catalog-card__weight-btn pirogova-popup-trigger" data-product-id="2" data-variation-id="22">1000 г</button>
+          </div>
+          <div class="catalog-card__footer">
+            <div class="catalog-card__price">от <strong>520 ₽</strong></div>
+            <button class="btn btn--primary catalog-card__btn pirogova-popup-trigger" data-product-id="2">Выбрать</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="catalog-card" data-product-id="3">
+        <button class="catalog-card__image-wrap pirogova-popup-trigger" data-product-id="3" aria-haspopup="dialog">
+          <div class="fake-img pie-3 pie-img"></div>
+          <div class="pie-emoji">🍎</div>
+        </button>
+        <div class="catalog-card__body">
+          <h3 class="catalog-card__title">
+            <button class="pirogova-popup-trigger catalog-card__title-btn" data-product-id="3">Шарлотка с яблоками</button>
+          </h3>
+          <p class="catalog-card__desc">Классическая бабушкина шарлотка с ароматом корицы и сочными яблочными дольками</p>
+          <div class="catalog-card__weights">
+            <button class="catalog-card__weight-btn pirogova-popup-trigger" data-product-id="3" data-variation-id="31">600 г</button>
+            <button class="catalog-card__weight-btn pirogova-popup-trigger" data-product-id="3" data-variation-id="32">900 г</button>
+            <button class="catalog-card__weight-btn pirogova-popup-trigger" data-product-id="3" data-variation-id="33">1200 г</button>
+          </div>
+          <div class="catalog-card__footer">
+            <div class="catalog-card__price">от <strong>480 ₽</strong></div>
+            <button class="btn btn--primary catalog-card__btn pirogova-popup-trigger" data-product-id="3">Выбрать</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="catalog-card" data-product-id="4">
+        <button class="catalog-card__image-wrap pirogova-popup-trigger" data-product-id="4" aria-haspopup="dialog">
+          <div class="fake-img pie-4 pie-img"></div>
+          <div class="pie-emoji">🍄</div>
+        </button>
+        <div class="catalog-card__body">
+          <h3 class="catalog-card__title">
+            <button class="pirogova-popup-trigger catalog-card__title-btn" data-product-id="4">Пирог с грибами и картошкой</button>
+          </h3>
+          <p class="catalog-card__desc">Лесные грибы с картофелем и луком — настоящий деревенский вкус в каждом кусочке</p>
+          <div class="catalog-card__weights">
+            <button class="catalog-card__weight-btn pirogova-popup-trigger" data-product-id="4" data-variation-id="41">500 г</button>
+            <button class="catalog-card__weight-btn pirogova-popup-trigger" data-product-id="4" data-variation-id="42">750 г</button>
+            <button class="catalog-card__weight-btn pirogova-popup-trigger" data-product-id="4" data-variation-id="43">1500 г</button>
+          </div>
+          <div class="catalog-card__footer">
+            <div class="catalog-card__price">от <strong>550 ₽</strong></div>
+            <button class="btn btn--primary catalog-card__btn pirogova-popup-trigger" data-product-id="4">Выбрать</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 5 -->
+      <article class="catalog-card" data-product-id="5">
+        <button class="catalog-card__image-wrap pirogova-popup-trigger" data-product-id="5" aria-haspopup="dialog">
+          <div class="fake-img pie-5 pie-img"></div>
+          <div class="pie-emoji">🍒</div>
+        </button>
+        <div class="catalog-card__body">
+          <h3 class="catalog-card__title">
+            <button class="pirogova-popup-trigger catalog-card__title-btn" data-product-id="5">Пирог с вишней</button>
+          </h3>
+          <p class="catalog-card__desc">Кисло-сладкая вишня в нежном закрытом тесте с сахарной корочкой — десерт к чаю</p>
+          <div class="catalog-card__weights">
+            <button class="catalog-card__weight-btn pirogova-popup-trigger" data-product-id="5" data-variation-id="51">500 г</button>
+            <button class="catalog-card__weight-btn pirogova-popup-trigger" data-product-id="5" data-variation-id="52">1000 г</button>
+          </div>
+          <div class="catalog-card__footer">
+            <div class="catalog-card__price">от <strong>490 ₽</strong></div>
+            <button class="btn btn--primary catalog-card__btn pirogova-popup-trigger" data-product-id="5">Выбрать</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 6 -->
+      <article class="catalog-card" data-product-id="6">
+        <button class="catalog-card__image-wrap pirogova-popup-trigger" data-product-id="6" aria-haspopup="dialog">
+          <div class="fake-img pie-6 pie-img"></div>
+          <div class="pie-emoji">🥩</div>
+        </button>
+        <div class="catalog-card__body">
+          <h3 class="catalog-card__title">
+            <button class="pirogova-popup-trigger catalog-card__title-btn" data-product-id="6">Курник</button>
+          </h3>
+          <p class="catalog-card__desc">Слоёный пирог с курицей, рисом и яйцом — сытный и ароматный, идеален на обед</p>
+          <div class="catalog-card__weights">
+            <button class="catalog-card__weight-btn pirogova-popup-trigger" data-product-id="6" data-variation-id="61">750 г</button>
+            <button class="catalog-card__weight-btn pirogova-popup-trigger" data-product-id="6" data-variation-id="62">1000 г</button>
+            <button class="catalog-card__weight-btn pirogova-popup-trigger" data-product-id="6" data-variation-id="63">1500 г</button>
+          </div>
+          <div class="catalog-card__footer">
+            <div class="catalog-card__price">от <strong>620 ₽</strong></div>
+            <button class="btn btn--primary catalog-card__btn pirogova-popup-trigger" data-product-id="6">Выбрать</button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── HOW IT WORKS ───────────────────────────────────── -->
+<section class="how-it-works" id="how-it-works">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Как это работает</h2>
+      <p class="section-subtitle">Всего 4 простых шага до вашего любимого пирога</p>
+    </div>
+    <ol class="hiw__steps" role="list">
+      <li class="hiw__step">
+        <div class="hiw__step-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="28" r="16"/><path d="M20 44c0-6.627 5.373-12 12-12s12 5.373 12 12"/><path d="M32 12v4M32 40v4M16 28h4M44 28h4"/></svg>
+        </div>
+        <h3 class="hiw__step-title">Выбираете пирог</h3>
+        <p class="hiw__step-desc">Смотрите каталог, выбираете любимый вкус и нужную граммовку</p>
+      </li>
+      <li class="hiw__step">
+        <div class="hiw__step-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="12" y="8" width="40" height="48" rx="4"/><path d="M22 20h20M22 30h20M22 40h12"/><circle cx="46" cy="46" r="10" fill="white" stroke="currentColor"/><path d="M42 46l2.5 2.5L50 42"/></svg>
+        </div>
+        <h3 class="hiw__step-title">Оформляете заказ</h3>
+        <p class="hiw__step-desc">Указываете адрес доставки и удобное время, оплачиваете онлайн</p>
+      </li>
+      <li class="hiw__step">
+        <div class="hiw__step-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 40h44v8a4 4 0 01-4 4H14a4 4 0 01-4-4v-8z"/><path d="M10 40c0-8 4-14 10-18l4-10h16l4 10c6 4 10 10 10 18"/><path d="M24 32c0-4 4-6 8-4s8 0 8-4"/></svg>
+        </div>
+        <h3 class="hiw__step-title">Мы готовим</h3>
+        <p class="hiw__step-desc">Свежий пирог выпекается специально для вас из домашних продуктов</p>
+      </li>
+      <li class="hiw__step">
+        <div class="hiw__step-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="20" width="36" height="24" rx="3"/><path d="M38 28h10l8 10v6H38V28z"/><circle cx="16" cy="50" r="5"/><circle cx="46" cy="50" r="5"/><path d="M11 50H2M21 50h17M51 50h5"/></svg>
+        </div>
+        <h3 class="hiw__step-title">Доставляем к вам</h3>
+        <p class="hiw__step-desc">Курьер привозит тёплый пирог прямо к вашей двери</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ─── MEDIA ──────────────────────────────────────────── -->
+<section class="media-section" id="media">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">О нас в СМИ</h2>
+      <p class="section-subtitle">Нас уже заметили</p>
+    </div>
+    <div class="media-grid">
+      <div class="media-card">
+        <span class="media-card__name">РБК</span>
+        <blockquote class="media-card__quote"><p>Лучший сервис доставки домашней выпечки по версии читателей</p></blockquote>
+      </div>
+      <div class="media-card">
+        <span class="media-card__name">The Village</span>
+        <blockquote class="media-card__quote"><p>Вкус, который напоминает бабушкину кухню</p></blockquote>
+      </div>
+      <div class="media-card">
+        <span class="media-card__name">Афиша</span>
+        <blockquote class="media-card__quote"><p>10 лучших мест для заказа домашней еды с доставкой</p></blockquote>
+      </div>
+      <div class="media-card">
+        <span class="media-card__name">Коммерсантъ</span>
+        <blockquote class="media-card__quote"><p>Семейный бизнес, покоривший столицу своими пирогами</p></blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACTS ───────────────────────────────────────── -->
+<section class="contacts" id="contacts">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Контакты</h2>
+    </div>
+    <div class="contacts__inner">
+      <div class="contacts__info">
+        <div class="contacts__item">
+          <div class="contacts__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 2 2 0 012 .99h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7a2 2 0 011.72 2.02z"/></svg>
+          </div>
+          <div>
+            <span class="contacts__label">Телефон</span>
+            <a href="tel:+74951234567" class="contacts__value">+7 (495) 123-45-67</a>
+          </div>
+        </div>
+        <div class="contacts__item">
+          <div class="contacts__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <span class="contacts__label">Email</span>
+            <a href="mailto:hello@pirogova.ru" class="contacts__value">hello@pirogova.ru</a>
+          </div>
+        </div>
+        <div class="contacts__item">
+          <div class="contacts__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <span class="contacts__label">Адрес</span>
+            <address class="contacts__value">г. Москва, ул. Пирогова, д. 1</address>
+          </div>
+        </div>
+        <div class="contacts__social">
+          <a href="#" class="contacts__social-link" aria-label="ВКонтакте">
+            <svg width="24" height="24" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C8.27 2 2 8.27 2 16s6.27 14 14 14 14-6.27 14-14S23.73 2 16 2zm5.85 17.93h-2.1c-.79 0-1.04-.63-2.46-2.06-1.24-1.2-1.79-1.2-2.09-1.2s-.27.09-.27.59v1.88c0 .55-.17.88-1.61.88-2.38 0-5.01-1.44-6.86-4.12C6.13 13.22 5.5 10.97 5.5 10.45c0-.3.12-.58.77-.58h2.1c.57 0 .79.27 1.01.9.87 3.22 2.3 6.04 2.9 6.04.22 0 .32-.1.32-.67V9.67c-.07-1.56-.9-1.7-.9-2.26 0-.27.21-.56.56-.56h3.3c.47 0 .63.25.63.79v3.51c0 .47.21.63.34.63.22 0 .41-.16.82-.57 1.29-1.44 2.2-3.64 2.2-3.64.12-.27.33-.53.9-.53h2.1c.63 0 .77.32.63.76-.26 1.23-2.82 4.82-2.82 4.82-.22.35-.3.5 0 .88.22.3.95.92 1.44 1.47.89 1.01 1.57 1.86 1.75 2.44.17.57-.11.87-.72.87z"/></svg>
+          </a>
+          <a href="#" class="contacts__social-link" aria-label="Telegram">
+            <svg width="24" height="24" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C8.27 2 2 8.27 2 16s6.27 14 14 14 14-6.27 14-14S23.73 2 16 2zm6.49 9.58l-2.37 11.18c-.17.77-.63.96-1.28.6l-3.53-2.6-1.7 1.63c-.19.19-.35.35-.71.35l.25-3.55 6.47-5.85c.28-.25-.06-.39-.43-.14l-8 5.04-3.45-1.08c-.75-.23-.76-.75.16-1.11l13.47-5.2c.62-.22 1.17.15.96 1.13z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="contacts__map">
+        <div style="background:var(--clr-bg-alt);height:400px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-lg);color:var(--clr-text-muted);font-size:1rem;gap:.5rem">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Здесь будет встроенная карта (Яндекс / 2GIS)
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ─── FOOTER ─────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <span class="footer__logo"><span style="color:#fff;font-size:1.25rem;font-weight:700">🥧 Пирогова</span></span>
+      <p class="footer__tagline">Домашние пироги с доставкой</p>
+    </div>
+    <div class="footer__nav">
+      <ul>
+        <li><a href="#catalog">Каталог</a></li>
+        <li><a href="#how-it-works">Как это работает</a></li>
+        <li><a href="#media">О нас в СМИ</a></li>
+        <li><a href="#contacts">Контакты</a></li>
+      </ul>
+    </div>
+    <div class="footer__contacts">
+      <a href="tel:+74951234567" class="footer__phone">+7 (495) 123-45-67</a>
+      <a href="mailto:hello@pirogova.ru" class="footer__email">hello@pirogova.ru</a>
+      <address class="footer__address">г. Москва, ул. Пирогова, д. 1</address>
+    </div>
+    <div class="footer__social">
+      <a href="#" aria-label="ВКонтакте">
+        <svg width="24" height="24" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C8.27 2 2 8.27 2 16s6.27 14 14 14 14-6.27 14-14S23.73 2 16 2zm5.85 17.93h-2.1c-.79 0-1.04-.63-2.46-2.06-1.24-1.2-1.79-1.2-2.09-1.2s-.27.09-.27.59v1.88c0 .55-.17.88-1.61.88-2.38 0-5.01-1.44-6.86-4.12C6.13 13.22 5.5 10.97 5.5 10.45c0-.3.12-.58.77-.58h2.1c.57 0 .79.27 1.01.9.87 3.22 2.3 6.04 2.9 6.04.22 0 .32-.1.32-.67V9.67c-.07-1.56-.9-1.7-.9-2.26 0-.27.21-.56.56-.56h3.3c.47 0 .63.25.63.79v3.51c0 .47.21.63.34.63.22 0 .41-.16.82-.57 1.29-1.44 2.2-3.64 2.2-3.64.12-.27.33-.53.9-.53h2.1c.63 0 .77.32.63.76-.26 1.23-2.82 4.82-2.82 4.82-.22.35-.3.5 0 .88.22.3.95.92 1.44 1.47.89 1.01 1.57 1.86 1.75 2.44.17.57-.11.87-.72.87z"/></svg>
+      </a>
+      <a href="#" aria-label="Telegram">
+        <svg width="24" height="24" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C8.27 2 2 8.27 2 16s6.27 14 14 14 14-6.27 14-14S23.73 2 16 2zm6.49 9.58l-2.37 11.18c-.17.77-.63.96-1.28.6l-3.53-2.6-1.7 1.63c-.19.19-.35.35-.71.35l.25-3.55 6.47-5.85c.28-.25-.06-.39-.43-.14l-8 5.04-3.45-1.08c-.75-.23-.76-.75.16-1.11l13.47-5.2c.62-.22 1.17.15.96 1.13z"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div class="container">
+      <p>© 2025 Пирогова. Все права защищены.</p>
+      <a href="#">Политика конфиденциальности</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── POPUP ──────────────────────────────────────────── -->
+<div class="popup-overlay" id="popup-overlay" aria-hidden="true"></div>
+<div class="popup" id="product-popup" role="dialog" aria-modal="true" aria-labelledby="popup-product-name" aria-hidden="true" tabindex="-1">
+  <button class="popup__close" id="popup-close" aria-label="Закрыть">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="2" y1="2" x2="18" y2="18"/><line x1="18" y1="2" x2="2" y2="18"/></svg>
+  </button>
+  <div class="popup__inner">
+    <div class="popup__gallery">
+      <div class="swiper popup-swiper" id="popup-swiper">
+        <div class="swiper-wrapper" id="popup-swiper-wrapper">
+          <div class="swiper-slide"><div class="popup__img-skeleton"></div></div>
+        </div>
+        <div class="swiper-pagination popup-swiper-pagination"></div>
+        <button class="swiper-button-prev"></button>
+        <button class="swiper-button-next"></button>
+      </div>
+    </div>
+    <div class="popup__details">
+      <div class="popup__loading" id="popup-loading" style="display:none">
+        <div class="spinner"></div>
+      </div>
+      <div class="popup__content" id="popup-content">
+        <h2 class="popup__title" id="popup-product-name"></h2>
+        <div class="popup__description" id="popup-description"></div>
+        <div class="popup__weights" id="popup-weights">
+          <span class="popup__weights-label">Выберите граммовку:</span>
+          <div class="popup__weights-options" id="popup-weights-options"></div>
+        </div>
+        <div class="popup__price-wrap">
+          <div class="popup__price" id="popup-price"></div>
+        </div>
+        <div class="popup__actions">
+          <div class="popup__qty">
+            <button class="popup__qty-btn" id="popup-qty-minus">−</button>
+            <input type="number" class="popup__qty-input" id="popup-qty-input" value="1" min="1" max="99">
+            <button class="popup__qty-btn" id="popup-qty-plus">+</button>
+          </div>
+          <button class="btn btn--primary popup__add-to-cart" id="popup-add-to-cart" disabled aria-disabled="true">В корзину</button>
+        </div>
+        <div class="popup__cart-feedback" id="popup-cart-feedback" hidden>
+          <span class="popup__cart-msg" id="popup-cart-msg">Добавлено в корзину!</span>
+          <a href="#" class="btn btn--secondary popup__checkout-link">Оформить заказ</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Dev banner -->
+<div class="dev-banner">⚡ Preview mode — <span>статический HTML</span> (без WP/PHP)</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+/* ── Mock product data (replaces WP AJAX in preview) ── */
+const MOCK_PRODUCTS = {
+  1: {
+    id: 1, name: 'Пирог с капустой', type: 'variable',
+    description: 'Сочная белокочанная капуста с яйцом и зелёным луком на нашем фирменном дрожжевом тесте. Выпекается из свежих фермерских продуктов каждое утро.',
+    images: [
+      { src: '', alt: 'Пирог с капустой', gradient: 'linear-gradient(135deg,#c8860a,#7b4a2d)', emoji: '🥧' },
+    ],
+    variations: [
+      { id: 11, weight_label: '500 г', price_html: '<strong>450 ₽</strong>', price: 450, in_stock: true, gradient: 'linear-gradient(135deg,#c8860a,#7b4a2d)', emoji: '🥧' },
+      { id: 12, weight_label: '750 г', price_html: '<strong>640 ₽</strong>', price: 640, in_stock: true, gradient: 'linear-gradient(135deg,#a07030,#5a3320)', emoji: '🥧' },
+      { id: 13, weight_label: '1000 г', price_html: '<strong>820 ₽</strong>', price: 820, in_stock: true, gradient: 'linear-gradient(135deg,#805020,#3d1c08)', emoji: '🥧' },
+    ]
+  },
+  2: {
+    id: 2, name: 'Пирог с черникой', type: 'variable',
+    description: 'Нежный пирог с черничным вареньем, посыпанный сахарной пудрой. Идеальный десерт для семейного чаепития — любимец детей и взрослых.',
+    images: [{ src: '', alt: 'Пирог с черникой', gradient: 'linear-gradient(135deg,#e8a87c,#c8860a)', emoji: '🫐' }],
+    variations: [
+      { id: 21, weight_label: '500 г', price_html: '<strong>520 ₽</strong>', price: 520, in_stock: true, gradient: 'linear-gradient(135deg,#e8a87c,#c8860a)', emoji: '🫐' },
+      { id: 22, weight_label: '1000 г', price_html: '<strong>940 ₽</strong>', price: 940, in_stock: true, gradient: 'linear-gradient(135deg,#c87050,#9e4020)', emoji: '🫐' },
+    ]
+  },
+  3: {
+    id: 3, name: 'Шарлотка с яблоками', type: 'variable',
+    description: 'Классическая бабушкина шарлотка с ароматом корицы и сочными яблочными дольками. Рецепт передаётся в нашей семье уже три поколения.',
+    images: [{ src: '', alt: 'Шарлотка', gradient: 'linear-gradient(135deg,#9e6040,#5a3320)', emoji: '🍎' }],
+    variations: [
+      { id: 31, weight_label: '600 г', price_html: '<strong>480 ₽</strong>', price: 480, in_stock: true, gradient: 'linear-gradient(135deg,#9e6040,#5a3320)', emoji: '🍎' },
+      { id: 32, weight_label: '900 г', price_html: '<strong>680 ₽</strong>', price: 680, in_stock: true, gradient: 'linear-gradient(135deg,#7e5030,#3a2010)', emoji: '🍎' },
+      { id: 33, weight_label: '1200 г', price_html: '<strong>870 ₽</strong>', price: 870, in_stock: false, gradient: 'linear-gradient(135deg,#604020,#2c1008)', emoji: '🍎' },
+    ]
+  },
+  4: {
+    id: 4, name: 'Пирог с грибами и картошкой', type: 'variable',
+    description: 'Белые лесные грибы с картофелем и луком — настоящий деревенский вкус в каждом кусочке. Готовится только на сливочном масле.',
+    images: [{ src: '', alt: 'Пирог с грибами', gradient: 'linear-gradient(135deg,#d4956a,#7b4a2d)', emoji: '🍄' }],
+    variations: [
+      { id: 41, weight_label: '500 г', price_html: '<strong>550 ₽</strong>', price: 550, in_stock: true, gradient: 'linear-gradient(135deg,#d4956a,#7b4a2d)', emoji: '🍄' },
+      { id: 42, weight_label: '750 г', price_html: '<strong>790 ₽</strong>', price: 790, in_stock: true, gradient: 'linear-gradient(135deg,#b47550,#5a3320)', emoji: '🍄' },
+      { id: 43, weight_label: '1500 г', price_html: '<strong>1490 ₽</strong>', price: 1490, in_stock: true, gradient: 'linear-gradient(135deg,#906040,#3d1c08)', emoji: '🍄' },
+    ]
+  },
+  5: {
+    id: 5, name: 'Пирог с вишней', type: 'variable',
+    description: 'Кисло-сладкая вишня в нежном закрытом тесте с золотистой сахарной корочкой. Идеальный десерт к послеобеденному чаю.',
+    images: [{ src: '', alt: 'Пирог с вишней', gradient: 'linear-gradient(135deg,#cd853f,#6b3a2a)', emoji: '🍒' }],
+    variations: [
+      { id: 51, weight_label: '500 г', price_html: '<strong>490 ₽</strong>', price: 490, in_stock: true, gradient: 'linear-gradient(135deg,#cd853f,#6b3a2a)', emoji: '🍒' },
+      { id: 52, weight_label: '1000 г', price_html: '<strong>880 ₽</strong>', price: 880, in_stock: true, gradient: 'linear-gradient(135deg,#a06030,#4b2010)', emoji: '🍒' },
+    ]
+  },
+  6: {
+    id: 6, name: 'Курник', type: 'variable',
+    description: 'Слоёный пирог с курицей, рисом и яйцом — сытный и ароматный праздничный пирог. Идеален на обед или в качестве подарка.',
+    images: [{ src: '', alt: 'Курник', gradient: 'linear-gradient(135deg,#b87333,#8b4513)', emoji: '🥩' }],
+    variations: [
+      { id: 61, weight_label: '750 г', price_html: '<strong>620 ₽</strong>', price: 620, in_stock: true, gradient: 'linear-gradient(135deg,#b87333,#8b4513)', emoji: '🥩' },
+      { id: 62, weight_label: '1000 г', price_html: '<strong>790 ₽</strong>', price: 790, in_stock: true, gradient: 'linear-gradient(135deg,#986030,#6b3510)', emoji: '🥩' },
+      { id: 63, weight_label: '1500 г', price_html: '<strong>1150 ₽</strong>', price: 1150, in_stock: true, gradient: 'linear-gradient(135deg,#784d25,#4b2508)', emoji: '🥩' },
+    ]
+  }
+};
+
+/* ── Override PirogovaData for preview ── */
+window.PirogovaData = {
+  ajaxUrl: '#',
+  nonce: 'preview',
+  cartUrl: '#',
+  checkoutUrl: '#',
+  currency: '₽',
+  i18n: { addToCart: 'В корзину', adding: 'Добавляем...', added: 'Добавлено!', goToCart: 'Корзина', selectWeight: 'Выберите вес', close: 'Закрыть' }
+};
+
+/* ── Patch fetch for preview (mock AJAX) ── */
+const _origFetch = window.fetch;
+window.fetch = function(url, opts) {
+  if (url === '#') {
+    const body = new URLSearchParams(opts.body);
+    const action = body.get('action');
+    if (action === 'pirogova_get_product') {
+      const pid = parseInt(body.get('product_id'), 10);
+      const product = MOCK_PRODUCTS[pid];
+      return Promise.resolve({ json: () => Promise.resolve({ success: true, data: product }) });
+    }
+    if (action === 'pirogova_add_to_cart') {
+      const count = (parseInt(document.getElementById('cart-count').textContent, 10) || 0) + 1;
+      return Promise.resolve({ json: () => Promise.resolve({ success: true, data: { cart_count: count, cart_total: '—', cart_url: '#', checkout_url: '#' } }) });
+    }
+  }
+  return _origFetch.apply(this, arguments);
+};
+
+/* ── Override renderGallery to use CSS gradients ── */
+document.addEventListener('DOMContentLoaded', function() {
+  // Patch renderGallery after main.js loads
+  const origScript = document.createElement('script');
+  origScript.src = '../pirogova-theme/assets/js/main.js';
+
+  // Inject gallery renderer patch before main.js
+  window._patchGallery = function(productId) {
+    const product = MOCK_PRODUCTS[productId];
+    if (!product) return;
+    const wrapper = document.getElementById('popup-swiper-wrapper');
+    if (!wrapper) return;
+    wrapper.innerHTML = '';
+    product.images.forEach(img => {
+      const slide = document.createElement('div');
+      slide.className = 'swiper-slide';
+      slide.innerHTML = `<div style="width:100%;height:100%;background:${img.gradient};display:flex;align-items:center;justify-content:center;font-size:8rem;filter:drop-shadow(0 8px 24px rgba(0,0,0,.2))">${img.emoji}</div>`;
+      wrapper.appendChild(slide);
+    });
+  };
+
+  window._patchVariantImage = function(variation) {
+    const wrapper = document.getElementById('popup-swiper-wrapper');
+    if (!wrapper) return;
+    const firstSlide = wrapper.querySelector('.swiper-slide');
+    if (!firstSlide) return;
+    firstSlide.style.opacity = '0';
+    firstSlide.style.transition = 'opacity .2s';
+    setTimeout(() => {
+      firstSlide.innerHTML = `<div style="width:100%;height:100%;background:${variation.gradient};display:flex;align-items:center;justify-content:center;font-size:8rem;filter:drop-shadow(0 8px 24px rgba(0,0,0,.2))">${variation.emoji}</div>`;
+      firstSlide.style.opacity = '1';
+    }, 150);
+  };
+});
+</script>
+<script src="../pirogova-theme/assets/js/main.js"></script>
+<script>
+/* ── Post-load patches for preview gallery ── */
+(function() {
+  // Monkey-patch renderGallery and swapGalleryImage to use gradients
+  const origOpen = window._openPopupForPreview;
+
+  // Re-wire gallery rendering
+  document.addEventListener('click', function(e) {
+    const t = e.target.closest('.pirogova-popup-trigger');
+    if (!t) return;
+    const pid = parseInt(t.dataset.productId || t.closest('[data-product-id]')?.dataset.productId, 10);
+    if (!pid) return;
+    const product = MOCK_PRODUCTS[pid];
+    if (!product) return;
+
+    // Override gallery after short delay (after main.js renders it)
+    setTimeout(() => {
+      const wrapper = document.getElementById('popup-swiper-wrapper');
+      if (!wrapper) return;
+      wrapper.innerHTML = '';
+      product.images.forEach(img => {
+        const slide = document.createElement('div');
+        slide.className = 'swiper-slide';
+        slide.innerHTML = `<div style="width:100%;height:100%;background:${img.gradient};display:flex;align-items:center;justify-content:center;font-size:8rem">${img.emoji}</div>`;
+        wrapper.appendChild(slide);
+      });
+      // Reinit swiper
+      if (window._pirogovaSwiper) window._pirogovaSwiper.update();
+    }, 80);
+
+    // Override weight btn click to swap gradient
+    setTimeout(() => {
+      document.querySelectorAll('.popup__weight-btn').forEach(btn => {
+        const varId = parseInt(btn.dataset.variationId, 10);
+        const variant = product.variations.find(v => v.id === varId);
+        if (!variant) return;
+        btn.addEventListener('click', () => {
+          setTimeout(() => {
+            const wrapper2 = document.getElementById('popup-swiper-wrapper');
+            if (!wrapper2) return;
+            const first = wrapper2.querySelector('.swiper-slide');
+            if (!first) return;
+            first.style.opacity = '0';
+            first.style.transition = 'opacity .2s';
+            setTimeout(() => {
+              first.innerHTML = `<div style="width:100%;height:100%;background:${variant.gradient};display:flex;align-items:center;justify-content:center;font-size:8rem">${variant.emoji}</div>`;
+              first.style.opacity = '1';
+            }, 150);
+          }, 10);
+        }, { capture: false });
+      });
+    }, 200);
+  }, true);
+})();
+</script>
+</body>
+</html>

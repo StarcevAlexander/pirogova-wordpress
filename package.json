@@ -1,0 +1,16 @@
+{
+  "name": "pirogova-wordpress",
+  "version": "1.0.0",
+  "description": "WordPress theme for Pirogova pie delivery — WooCommerce + YooKassa",
+  "private": true,
+  "scripts": {
+    "lint:css": "stylelint \"pirogova-theme/assets/css/**/*.css\"",
+    "lint:js": "eslint pirogova-theme/assets/js/",
+    "validate": "npm run lint:css && npm run lint:js"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "stylelint": "^16.3.1",
+    "stylelint-config-standard": "^36.0.0"
+  }
+}

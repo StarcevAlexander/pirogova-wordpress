@@ -1,0 +1,9 @@
+/* Pirogova — Admin styles */
+
+/* Order status badges */
+.order-status.status-pirogova-cooking    { background: #fff3cd; color: #856404; }
+.order-status.status-pirogova-delivering { background: #cff4fc; color: #055160; }
+.order-status.status-pirogova-delivered  { background: #d1e7dd; color: #0a3622; }
+
+/* Delivery info column */
+.column-pirogova_delivery_info { width: 200px; }
