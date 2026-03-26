@@ -879,10 +879,9 @@ a.contacts__value:hover { color: var(--clr-primary); }
 
 /* Mini-cart items */
 .mini-cart-item {
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  align-items: center;
-  gap: var(--space-sm) var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: .375rem;
   padding: var(--space-md) 0;
   border-bottom: 1px solid var(--clr-border);
   animation: fadeIn .2s var(--ease);
@@ -890,9 +889,15 @@ a.contacts__value:hover { color: var(--clr-primary); }
 .mini-cart-item:last-child { border-bottom: none; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } }
 
-.mini-cart-item__info { grid-column: 1 / -1; }
 .mini-cart-item__name { font-size: .9375rem; font-weight: 600; }
-.mini-cart-item__meta { font-size: .8125rem; color: var(--clr-text-muted); margin-top: .15rem; }
+.mini-cart-item__meta { font-size: .8125rem; color: var(--clr-text-muted); }
+.mini-cart-item__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-top: .25rem;
+}
 
 .mini-cart-item__controls {
   display: flex;

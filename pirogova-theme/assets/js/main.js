@@ -103,17 +103,17 @@
       total += item.priceNum * item.qty;
       return `
         <div class="mini-cart-item" data-product-id="${item.id}">
-          <div class="mini-cart-item__info">
-            <div class="mini-cart-item__name">${item.name}</div>
-            ${item.variationLabel ? `<div class="mini-cart-item__meta">${item.variationLabel}</div>` : ''}
+          <div class="mini-cart-item__name">${item.name}</div>
+          ${item.variationLabel ? `<div class="mini-cart-item__meta">${item.variationLabel}</div>` : ''}
+          <div class="mini-cart-item__bottom">
+            <div class="mini-cart-item__controls">
+              <button class="mini-cart-item__btn mini-cart-item__minus" data-id="${item.id}" aria-label="Уменьшить">−</button>
+              <span class="mini-cart-item__qty">${item.qty}</span>
+              <button class="mini-cart-item__btn mini-cart-item__plus pirogova-popup-trigger"
+                      data-product-id="${item.id}" aria-label="Добавить ещё">+</button>
+            </div>
+            <div class="mini-cart-item__price">${(item.priceNum * item.qty).toLocaleString('ru-RU')} ₽</div>
           </div>
-          <div class="mini-cart-item__controls">
-            <button class="mini-cart-item__btn mini-cart-item__minus" data-id="${item.id}" aria-label="Уменьшить">−</button>
-            <span class="mini-cart-item__qty">${item.qty}</span>
-            <button class="mini-cart-item__btn mini-cart-item__plus pirogova-popup-trigger"
-                    data-product-id="${item.id}" aria-label="Добавить ещё">+</button>
-          </div>
-          <div class="mini-cart-item__price">${(item.priceNum * item.qty).toLocaleString('ru-RU')} ₽</div>
         </div>`;
     }).join('');
 
